@@ -81,7 +81,13 @@ pm2 start homebridge
 sudo FLASK_APP=server.py flask run
 ```
 
+### Planned Changes/TODO
 
+* Split brightness functionality out so it's not tethered to color codes. This will allow changing the brightness of patterns.
+* Configure device notifications so that when a pattern "device" is activated, other devices turn off and notify HomeBridge of this change.
+* Figure out what's up with the threads. Currently if you turn on the rainbow device, then tinker with the standard device, two different threads simultaneously communicate with the LED strip. It looks like there are some checks to handle this already, but it seems to take too long. I might have to kill the thread?
+* Add more patterns
+* Ensure migration to [HomeBridge HTTP RGB Push](https://github.com/QuickSander/homebridge-http-rgb-push) is working as expected.
 
 [homebridge neopixel](https://www.studiopieters.nl/homebridge-neopixel-light/)
 [RPi neipixel](https://learn.adafruit.com/neopixels-on-raspberry-pi/raspberry-pi-wiring)
