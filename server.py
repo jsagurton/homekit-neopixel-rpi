@@ -60,19 +60,15 @@ def hex_to_rgb(value):
     return tuple(int(value[i:i + lv // 3], 16) for i in range(0, lv, lv // 3))
 
 def rainbow_cycle():
-  wait = 0.000001
-  for j in range(255):
-    for i in range(num_pixels):
-      pixel_index = (i * 256 // num_pixels) + j
-      pixels[i] = wheel(pixel_index & 255)
-    pixels.show()
-    time.sleep(wait)
   global enableRainbow
-  if(enableRainbow):
-    rainbow_cycle()
-  else:
-    off()
-
+  while enableRainbow:
+      for j in range(255):
+        for i in range(num_pixels):
+          pixel_index = (i * 256 // num_pixels) + j
+          pixels[i] = wheel(pixel_index & 255)
+        pixels.show()
+  off()
+  return
 
 @app.route("/status")
 def status():
@@ -83,11 +79,6 @@ def status():
 @app.route("/bright")
 def bright():
   global rgb
-  # r = round(rgb[0]/2.55,2)
-  # g = round(rgb[1]/2.55,2)
-  # b = round(rgb[2]/2.55,2)
-  # x = max(r,g)
-  # V = max(x,b)
   print(str(int(brightness*100)))
   return str(int(brightness*100))
 
