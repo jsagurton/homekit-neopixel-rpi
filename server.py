@@ -98,9 +98,9 @@ def rainbow():
   pixels.fill(rgb)
   pixels.show()
   if(enableRainbow==False):
+    enableRainbow=True
     t = threading.Thread(target = rainbow_cycle)
     t.start()
-  enableRainbow=True
   return "on"
 
 # TODO: Test this actually works. Can this be condensed in to the other /bright route? Is it easier to just have one with no args and one with args?
