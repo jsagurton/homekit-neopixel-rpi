@@ -63,6 +63,11 @@ def rainbow_cycle():
   global enableRainbow
   while enableRainbow:
       for j in range(255):
+	# This is necessary because with longer strands this nested loop just takes foreverrrrrr, so breaking will force a re-eval. It's hacky, and could
+        # be done more cleanly probably. Consider refactoring in the future to move the thread object to be global, making it stoppable and then implementing
+        # more consistent checks instead of having random globals flying all over the place. Blame the wine.
+        if not enableRainbow:
+          break
         for i in range(num_pixels):
           pixel_index = (i * 256 // num_pixels) + j
           pixels[i] = wheel(pixel_index & 255)
@@ -154,6 +159,3 @@ def set(values):
   pixels.fill(rgb)
   pixels.show()
   return "ok"
-
-
-# Weird edge case currently where if you set brightness to 0, because it takes so long for the loops to execute in the rainbow pattern, but the brightness change happens immediately a race condition can happen. Fix that, probably by just having the off method hunt and kill the thread.
