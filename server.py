@@ -10,7 +10,7 @@ from flask import Flask
 pixel_pin = board.D21
 
 # The number of NeoPixels
-num_pixels = 150
+num_pixels = 350
 
 # The order of the pixel colors - RGB or GRB. Some NeoPixels have red and green reversed!
 # For RGBW NeoPixels, simply change the ORDER to RGBW or GRBW.
@@ -154,3 +154,6 @@ def set(values):
   pixels.fill(rgb)
   pixels.show()
   return "ok"
+
+
+# Weird edge case currently where if you set brightness to 0, because it takes so long for the loops to execute in the rainbow pattern, but the brightness change happens immediately a race condition can happen. Fix that, probably by just having the off method hunt and kill the thread.
