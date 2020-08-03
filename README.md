@@ -9,10 +9,16 @@ homekit-neopixel-rpi
 
 Hardware:
 
-  Raspberry Pi
-  Neopixel strip
+  - Raspberry Pi (I used a Zero W)
+  - Neopixel strip
+  - Level Shifter
+  - Capacitor
 
-Software
+See Adafruit's [NeoPixels on Raspberry Pi](https://learn.adafruit.com/neopixels-on-raspberry-pi/overview) guide for more information on the level shifter and capacitor. You can also overachieve like I did and use a proto board (I used the ProtoBonnet from Adafruit) and soldered on the appropriate JST-SM connectors that are commonly used on NeoPixel strips. If you're like me and will be annoyed by having to power the Raspberry Pi and the NeoPixels separately, you can actually just use a 2.1mm DC barrel connector and also power your Raspberry Pi from this. The Pi Zero lacks circuit protection anyway, so you don't lose anything by powering it via GPIO. The non-Zero Raspberry Pis do have circuit protection (or at least modern iterations, I did not research older variants) and you may not want to sacrifice the circuit protection.
+
+<img src="image2.jpg" width="100%">
+
+Software:
 
   homebridge on Raspberry Pi
   python3
@@ -21,12 +27,16 @@ Software
 
 ### Install 
 
-```
-sudo npm install -g pm2 homebridge homebridge-neopixel --unsafe-perm
-```
+See the official documentation for [Installing Homebridge on Raspbian](https://github.com/homebridge/homebridge/wiki/Install-Homebridge-on-Raspbian). I recommend following their documentation instead of the recs I had here before, as you can get a pretty web interface (Homebridge Config UI) that makes it much easier to change your config files than was the case when I started this project about a year ago (I originally gave up on implementing patterns and had opted for a solution that could talk to both analog and NeoPixel LEDs by just calling out to the shell, but then decided I really wanted patterns and forked the upstream code). They even have an already baked Raspbian image.
 
+Regardless of whether you use the pre-baked Raspbian image or not, you will need to install the [Adafruit NeoPixel Library](https://learn.adafruit.com/neopixels-on-raspberry-pi/python-usage).
 
-### setting
+You'll want to change `num_pixels` and `pixel_pin` to match your configuration.
+
+You'll also need the "HttpPushRgb" Homebridge package.
+
+### Config.json
+You will need the `bridge` section in your JSON for Homebridge to work properly. See https://github.com/homebridge/homebridge/blob/master/config-sample.json for more context. 
 ```
 # .homebridge/config
 # add 
@@ -65,11 +75,6 @@ sudo npm install -g pm2 homebridge homebridge-neopixel --unsafe-perm
 }
 ```
 
-### Start the homebridge
-```
-pm2 start homebridge
-```
-
 ### Start the server
 ```python
 sudo FLASK_APP=server.py flask run
@@ -82,6 +87,3 @@ sudo FLASK_APP=server.py flask run
 * Figure out what's up with the threads. Currently if you turn on the rainbow device, then tinker with the standard device, two different threads simultaneously communicate with the LED strip. It looks like there are some checks to handle this already, but it seems to take too long. I might have to kill the thread? - Some progress made here. I used a loop structure instead of constantly pushing more function calls on the stack recursively.
 * Add more patterns
 * Ensure migration to [HomeBridge HTTP RGB Push](https://github.com/QuickSander/homebridge-http-rgb-push) is working as expected.
-
-[homebridge neopixel](https://www.studiopieters.nl/homebridge-neopixel-light/)
-[RPi neipixel](https://learn.adafruit.com/neopixels-on-raspberry-pi/raspberry-pi-wiring)
