@@ -87,3 +87,4 @@ sudo FLASK_APP=server.py flask run
 * Figure out what's up with the threads. Currently if you turn on the rainbow device, then tinker with the standard device, two different threads simultaneously communicate with the LED strip. It looks like there are some checks to handle this already, but it seems to take too long. I might have to kill the thread? - Some progress made here. I used a loop structure instead of constantly pushing more function calls on the stack recursively.
 * Add more patterns
 * Ensure migration to [HomeBridge HTTP RGB Push](https://github.com/QuickSander/homebridge-http-rgb-push) is working as expected.
+* Better documentation of how to make the ProtoBoard and power the RPi from a barrel jack.
