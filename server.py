@@ -115,12 +115,8 @@ def rainbow():
 def setbright(value):
   global rgb
   global brightness
-  # pixels.fill(rgb)
   brightness = int(value) / 100
   rgb = tuple(int(brightness * v) for v in rgbRatio)
-  print("rgb inside setbright", rgb)
-  # print("brightness, inside setbright", brightness)
-  # pixels.show()
   return str(int(brightness*100))
 
 @app.route("/on")
@@ -154,8 +150,6 @@ def set(values):
   rgb=tuple(int(h[i:i+2], 16) for i in (0, 2 ,4))
   # Figure out which of these is the highest value, and how far it needs to scale to get to 255
   rgbRatio = tuple(int(v*255/max(rgb)) for v in rgb)
-  print("rgb, inside set call", rgb)
-  print("rgbRatio, inside set call", rgbRatio)
   pixels.fill(rgb)
   pixels.show()
   return "ok"
