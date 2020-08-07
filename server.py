@@ -10,7 +10,7 @@ from flask import Flask
 pixel_pin = board.D21
 
 # The number of NeoPixels
-num_pixels = 350
+num_pixels = 137
 
 # The order of the pixel colors - RGB or GRB. Some NeoPixels have red and green reversed!
 # For RGBW NeoPixels, simply change the ORDER to RGBW or GRBW.

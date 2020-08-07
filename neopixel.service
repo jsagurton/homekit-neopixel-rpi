@@ -1,0 +1,12 @@
+[Unit]
+Description=Gunicorn instance to serve neopixel web service
+After=network.target
+
+[Service]
+User=root
+Group=root
+WorkingDirectory=/var/lib/homekit-neopixel-rpi
+ExecStart=/usr/bin/gunicorn3 -w 1 server:app -b 127.0.0.1:5000 
+
+[Install]
+WantedBy=multi-user.target
