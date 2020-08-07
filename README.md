@@ -102,6 +102,5 @@ You will need the `bridge` section in your JSON for Homebridge to work properly.
 * [x] Daemonize the webserver.
 * [ ] Better documentation of how to make the ProtoBoard and power the RPi from a barrel jack.
 
-[homebridge neopixel](https://www.studiopieters.nl/homebridge-neopixel-light/)
 [RPi neipixel](https://learn.adafruit.com/neopixels-on-raspberry-pi/raspberry-pi-wiring)
 
