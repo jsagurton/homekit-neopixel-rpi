@@ -28,7 +28,7 @@ Software:
 ### Install 
 Follow the directions in the HomeBridge documents to install HomeBridge and get it running as a daemon. You'll probably want to clone this repo to /var/lib/ so that the end location of `server.py` ends up being `/var/lib/homekit-neopixel-rpi/server.py`.
 
-### Daemonize the server
+#### Daemonize the server
 For my own simplicity I've gone ahead and included the sudo that you'll almost certainly need in here.
 ```bash
 # Install gunicorn
@@ -43,7 +43,7 @@ sudo systemctl start neopixel
 ```
 
 After this you should be able to see the status of the daemon using systemd, it should start on boot, etc. To see the status use `sudo systemctl status neopixel`.
-=======
+
 See the official documentation for [Installing Homebridge on Raspbian](https://github.com/homebridge/homebridge/wiki/Install-Homebridge-on-Raspbian). I recommend following their documentation instead of the recs I had here before, as you can get a pretty web interface (Homebridge Config UI) that makes it much easier to change your config files than was the case when I started this project about a year ago (I originally gave up on implementing patterns and had opted for a solution that could talk to both analog and NeoPixel LEDs by just calling out to the shell, but then decided I really wanted patterns and forked the upstream code). They even have an already baked Raspbian image.
 
 Regardless of whether you use the pre-baked Raspbian image or not, you will need to install the [Adafruit NeoPixel Library](https://learn.adafruit.com/neopixels-on-raspberry-pi/python-usage).
